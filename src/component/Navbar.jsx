@@ -33,7 +33,7 @@ const Navbar = () => {
     </>
     return (
    
-      <div className={`navbar fixed rounded-md right-0 left-0 z-50 py-4 px-5 ${isScrolled? 'bg-white/30   backdrop-blur-md shadow-md':'bg-blue-950 '}`}>
+      <div className={`navbar  rounded-md right-0 left-0 z-50 py-4 px-5 ${isScrolled? 'bg-white/30   backdrop-blur-md shadow-md':'bg-blue-950 '}`}>
       <div className="navbar-start">
           <div className="dropdown">
               <div tabIndex={0} role="button" className="btn text-xl text-white btn-ghost lg:hidden">
@@ -45,7 +45,7 @@ const Navbar = () => {
                   {link}
               </ul>
           </div>
-          <a className="btn btn-ghost hidden sm:block text-xl"> hai</a>
+          <a className="btn btn-ghost text-white hidden sm:block text-3xl"> Visa Navigate</a>
       </div>
       <div className="navbar-center  hidden lg:flex">
           <ul className="menu text-white text-lg font-semibold gap-4 menu-horizontal px-1">
@@ -62,7 +62,7 @@ const Navbar = () => {
               </div>
               : 
                <div>
-              {/* <img className="w-14 h-14 rounded-full" src={icon} alt="" /> */}
+              {/* <img className="w-14 h-14 rounded-full" src='https://bracketweb.com/treckwp/wp-content/uploads/2023/04/logo-dark.png' alt="" /> */}
           </div>
           }
         

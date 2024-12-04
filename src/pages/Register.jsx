@@ -39,7 +39,7 @@ const{ createSignUp,setUser}=useContext(authContext)
 
         createSignUp(email,password)
        .then((result) => {
-        // Signed up 
+        navigate('/')
  
         setUser(result.user)
         // updateUser({displayName:name,photoURL:photo})

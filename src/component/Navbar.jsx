@@ -8,7 +8,7 @@ import { authContext } from "../Provider/AuthProvider";
 
 
 const Navbar = () => {
-  const {user,userSignOut}=useContext(authContext)
+  const {user,signOutUser}=useContext(authContext)
   const [isScrolled,setIsScrolled]=useState(false)
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +67,7 @@ const Navbar = () => {
           }
         
           {
-              user?  <button onClick={()=>userSignOut()} className="btn bg-neutral-600 text-white">SignOut</button>
+              user?  <button onClick={()=>signOutUser()} className="btn bg-neutral-600 text-white">SignOut</button>
               :
            <div className="sm:*:ml-2 flex gap-1">
               <Link to={'/register'} className="btn bg-neutral-600 text-white ">signIn</Link>

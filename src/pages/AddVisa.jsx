@@ -1,30 +1,66 @@
+import { useState } from "react";
 
 const AddVisa = () => {
 
+    const [selectOption,setSelectOption]=useState([])
+    const options = ["Valid passport","Visa application form", "Recent passport-sized photograph", "Proof of financial means", "Travel itinerary",];
+console.log(selectOption)
     const handleBack = () => {
 
     }
 
     const handleSubmit = (e) => {
 
+
+
         e.preventDefault()
-        const form=e.target;
-        const name=form.name.value;
-        const img=form.img.value;
-        const visaType=form.visaType.value;
-        const processingTime=form.processingTime.value
-        const description=form.description.value
-        const age=form.age.value;
-        const fee=form.fee.value;
-        const validity=form.validity.value;
-        const application=form.application.value;
-        const option1=form.option1.value;
-        const option2=form.option2.value;
-   const visaForm={name,img,visaType,processingTime,description,age,fee,validity,application}
-   console.log(visaForm)
         
-     
+        const form = e.target;
+        const name = form.name.value;
+        const img = form.img.value;
+        const visaType = form.visaType.value;
+        const processingTime = form.processingTime.value
+        const description = form.description.value
+        const age = form.age.value;
+        const fee = form.fee.value;
+        const validity = form.validity.value;
+        const application = form.application.value
+        // handleCheckboxChange()
+        const value=form.value;
+        const isChecked=form.checked;
+        console.log(isChecked)
+        if(isChecked){
+            setSelectOption((prev)=>[...prev,value])
+            console.log(`checked${value}`)
+        }
+
+        const visaForm = { name, img, visaType, processingTime, description, age, fee, validity, application }
+     fetch('http://localhost:7000/visas',{
+        method:"POST",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify(visaForm)
+     })
+     .then(res=>res.json())
+     .then(data=>{
+        console.log(data)
+     })
+
+
     }
+
+
+const handleCheckboxChange=(e)=>{
+const form=e.target
+    const value=form.value;
+    const isChecked=form.checked;
+    console.log(isChecked)
+    if(isChecked){
+        setSelectOption((prev)=>[...prev,value])
+        console.log(`checked${value}`)
+    }
+}
     return (
         <div className='bg-[#F4F3F0] p-10'>
             <div className="">
@@ -37,13 +73,13 @@ const AddVisa = () => {
                                     <label className="label">
                                         <span className="label-text">Country Name</span>
                                     </label>
-                                    <input type="text" name='name' placeholder="Enter your coffe name" className="input input-bordered w-full " required />
+                                    <input type="text" name='name' placeholder="Enter your country name" className="input input-bordered w-full " required />
                                 </div>
                                 <div className="w-1/2">
                                     <label className="label">
                                         <span className="label-text">Country Image</span>
                                     </label>
-                                    <input type="text" name='img' placeholder="Enter your coffee cheif" className="input w-full input-bordered" required />
+                                    <input type="text" name='img' placeholder="Enter your country photo url" className="input w-full input-bordered" required />
 
                                 </div>
                             </div>
@@ -75,7 +111,7 @@ const AddVisa = () => {
                                         <span className="label-text">Description</span>
                                     </label>
                                     <textarea
-                                    name="description"
+                                        name="description"
                                         placeholder="Description"
                                         className="textarea textarea-bordered textarea-xs w-full "></textarea>
                                 </div>
@@ -92,8 +128,8 @@ const AddVisa = () => {
                                     <label className="label">
                                         <span className="label-text">Fee</span>
                                     </label>
-                                    <input type="number" name='fee' placeholder="Enter photo URL" className="input w-full input-bordered" required />
-                                  
+                                    <input type="number" name='fee' placeholder="Enter fee" className="input w-full input-bordered" required />
+
 
                                 </div>
                                 <div className="w-1/2">
@@ -109,8 +145,8 @@ const AddVisa = () => {
                                     <label className="label">
                                         <span className="label-text">Application Method</span>
                                     </label>
-                                    <input type="number" name='application' placeholder="Enter your application method" className="input w-full input-bordered" required />
-                                  
+                                    <input type="text" name='application' placeholder="Enter your application method" className="input w-full input-bordered" required />
+
 
                                 </div>
                                 <div className="w-1/2">
@@ -118,29 +154,20 @@ const AddVisa = () => {
                                         <span className="label-text">Required Document</span>
                                     </label>
                                     {/* <input type="text" name='validity' placeholder="Enter Validity" className="input w-full input-bordered" required /> */}
-                                  <div  id="checkboxForm">
-                                  <label>
-      <input type="checkbox" name="option1" value=" Valid Password" />
-      Valid Password
-    </label>
-    <label>
-      <input type="checkbox" name="option2" value="Visa application " />
-  Visa application
-    </label>
-    <label>
-      <input type="checkbox" name="option3" value="Recent passport-sized photograph" />
-      Recent passport-sized photograph
-    </label>
-    <label>
-      <input type="checkbox" name="option4" value=" Travel itinerary" />
-      Travel itinerary
-    </label>
-    <label>
-      <input type="checkbox" name="option5" value='  Proof of financial means' />
-      Proof of financial means
-    </label>
-
-                                  </div>
+                                    {
+                                        options.map((option, index) => (
+                                            <div key={index} className="mb-2">
+                                                <label >
+                                                    <input
+                                                        type="checkbox"
+                                                        value={option}
+                                                      
+                                                        className="mr-2"
+                                                    />
+                                                    {option}
+                                                </label>
+                                            </div>
+                                        ))}
                                 </div>
                             </div>
                             <div className="form-control mt-6">

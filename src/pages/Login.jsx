@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const {signIn,setUser}=useContext(authContext)
+    const {signIn,setUser,loginWithGoogle}=useContext(authContext)
     const [visible,setVisible]=useState(false)
     const navigate=useNavigate('')
     const emailRef=useRef()
@@ -36,6 +36,18 @@ const Login = () => {
       
      
       }
+
+    //   login with google
+    const handleGoogle=()=>{
+        loginWithGoogle()
+        .then((result)=>{
+            setUser(result.user)
+            navigate('/')
+        })
+        .catch(()=>{
+
+        })
+    }
     return (
         <div className="hero  ">
         <div className="card bg-base-100 p-10 w-full max-w-sm shrink-0 shadow-2xl">
@@ -73,7 +85,7 @@ const Login = () => {
          </form>
          <div className="divider">Login with other option</div>
          <div className='text-center space-x-2'>
-             <button  className='btn text-4xl bg-white'><FcGoogle></FcGoogle></button>
+             <button onClick={handleGoogle}  className='btn text-4xl bg-white'><FcGoogle></FcGoogle></button>
              <button className='btn text-4xl bg-white'><VscGithub></VscGithub></button>
          </div>
        

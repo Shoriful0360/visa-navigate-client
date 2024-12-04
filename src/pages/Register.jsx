@@ -10,7 +10,7 @@ import { authContext } from "../Provider/AuthProvider";
 
 
 const Register = () => {
-const{ createSignUp,setUser}=useContext(authContext)
+const{ createSignUp,setUser,updateUserProfile}=useContext(authContext)
    
     const [visible,setVisible]=useState(false)
     const [error,setError]=useState('')
@@ -38,21 +38,22 @@ const{ createSignUp,setUser}=useContext(authContext)
           }
 
         createSignUp(email,password)
-       .then((result) => {
-        navigate('/')
+       .then(() => {
+    
  
-        setUser(result.user)
-        // updateUser({displayName:name,photoURL:photo})
-        // .then(()=>{
+   
+        updateUserProfile({displayName:name,photoURL:photo})
+        .then(()=>{
          
-        //     setUser((prev)=>{
-        //         return {...prev,displayName:name,photoURL:photo}
-        //     })
-        //     navigate('/')
-        // }).catch(()=>{
+            setUser((prev)=>{
+                return {...prev,displayName:name,photoURL:photo}
+            })
+          
+            navigate('/')
+        }).catch(()=>{
            
-        // })
-        // ...
+        })
+        
       })
        .catch(error=>{
       setError(error.message)

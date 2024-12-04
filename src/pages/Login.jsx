@@ -1,13 +1,17 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { GoEye } from 'react-icons/go';
 import { FcGoogle } from 'react-icons/fc';import { VscGithub } from 'react-icons/vsc';
 import { IoEyeOffOutline } from 'react-icons/io5';
+import { authContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 
 const Login = () => {
+    const {signIn,setUser}=useContext(authContext)
     const [visible,setVisible]=useState(false)
+    const navigate=useNavigate('')
     const emailRef=useRef()
     
 
@@ -15,6 +19,20 @@ const Login = () => {
         e.preventDefault()
        const email=e.target.email.value;
        const password=e.target.password.value;
+       signIn(email,password)
+       .then(result=>{
+        setUser(result.user)
+        navigate('/')
+       })
+       .catch(()=>{
+      
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "email or password invalid!",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
+       })
       
      
       }

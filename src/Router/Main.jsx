@@ -8,6 +8,7 @@ import VisaApplication from "../pages/VisaApplication";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../Private/PrivateRoute";
+import VisaDetails from "../component/VisaDetails";
 
 
 const router=createBrowserRouter([
@@ -17,7 +18,13 @@ const router=createBrowserRouter([
         children:[
             {
                 path:'/',
-                element:<Home></Home>
+                element:<Home></Home>,
+              
+            },
+            {
+                path:'/visaDetails/:id',
+                element:<VisaDetails></VisaDetails>,
+                loader:({params})=>fetch(`http://localhost:7000/visas/${params.id}`)
             },
         {
             path:'/allVisa',

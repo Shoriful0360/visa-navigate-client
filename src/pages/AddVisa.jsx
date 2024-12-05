@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Swal from "sweetalert2";
+import { authContext } from "../Provider/AuthProvider";
 
 const AddVisa = () => {
-
-    const [selectOption,setSelectOption]=useState([])
-    const options = ["Valid passport","Visa application form", "Recent passport-sized photograph", "Proof of financial means", "Travel itinerary",];
-console.log(selectOption)
+    const { user } = useContext(authContext)
+    const { email } = user
+    const [selectOption, setSelectOption] = useState([])
+    const options = ["Valid passport", "Visa application form", "Recent passport-sized photograph", "Proof of financial means", "Travel itinerary",];
+    console.log(selectOption)
     const handleBack = () => {
 
     }
@@ -14,7 +17,7 @@ console.log(selectOption)
 
 
         e.preventDefault()
-        
+
         const form = e.target;
         const name = form.name.value;
         const img = form.img.value;
@@ -26,41 +29,50 @@ console.log(selectOption)
         const validity = form.validity.value;
         const application = form.application.value
         // handleCheckboxChange()
-        const value=form.value;
-        const isChecked=form.checked;
+
+        const visaForm = { name, img, visaType, processingTime, description, age, fee, validity, application, selectOption, email }
+        fetch('http://localhost:7000/visas', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(visaForm)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "successfull,added your visa!",
+
+                    });
+                    form.reset()
+
+                }
+                console.log(data)
+            })
+
+
+    }
+
+
+    const handleCheckboxChange = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const value = form.value;
+        const isChecked = form.checked;
         console.log(isChecked)
-        if(isChecked){
-            setSelectOption((prev)=>[...prev,value])
-            console.log(`checked${value}`)
+        if (isChecked) {
+            setSelectOption((prev) => [...prev, value])
+
         }
-
-        const visaForm = { name, img, visaType, processingTime, description, age, fee, validity, application }
-     fetch('http://localhost:7000/visas',{
-        method:"POST",
-        headers:{
-            'content-type':'application/json'
-        },
-        body:JSON.stringify(visaForm)
-     })
-     .then(res=>res.json())
-     .then(data=>{
-        console.log(data)
-     })
-
-
+        else {
+            setSelectOption((prev) => prev.filter((opt) => opt !== value));
+            console.log(`Unchecked: ${value}`);
+        }
+        form.reset()
     }
-
-
-const handleCheckboxChange=(e)=>{
-const form=e.target
-    const value=form.value;
-    const isChecked=form.checked;
-    console.log(isChecked)
-    if(isChecked){
-        setSelectOption((prev)=>[...prev,value])
-        console.log(`checked${value}`)
-    }
-}
     return (
         <div className='bg-[#F4F3F0] p-10'>
             <div className="">
@@ -94,7 +106,8 @@ const form=e.target
                                         <option>Tourist visa</option>
                                         <option>Student visa</option>
                                         <option>Official visa</option>
-                                        <option>JOb visa</option>
+                                        <option>Job visa</option>
+                                        <option>Residential visa</option>
                                     </select>
                                 </div>
                                 <div className="w-1/2">
@@ -161,7 +174,7 @@ const form=e.target
                                                     <input
                                                         type="checkbox"
                                                         value={option}
-                                                      
+                                                        onChange={handleCheckboxChange}
                                                         className="mr-2"
                                                     />
                                                     {option}

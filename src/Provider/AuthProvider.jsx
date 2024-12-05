@@ -4,6 +4,7 @@ import { auth } from "../firebase/firebase.init";
 
 export const authContext=createContext(null)
 const AuthProvider = ({children}) => {
+    const [visas,setVisas]=useState([]);
     const [user,setUser]=useState()
     const [loading,setLoading]=useState(true)
 // create sing up
@@ -48,9 +49,15 @@ const AuthProvider = ({children}) => {
         }
 
     }, [])
+  
+useEffect(()=>{
+    fetch('http://localhost:7000/visas')
+    .then(res=>res.json())
+    .then(data=>setVisas(data))
+},[])
 
     const info={
-        user,createSignUp,setUser,signOutUser,signIn,loginWithGoogle,updateUserProfile
+        user,createSignUp,setUser,loading,setVisas,visas,signOutUser,signIn,loginWithGoogle,updateUserProfile
     }
     return (
         <div>

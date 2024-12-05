@@ -28,7 +28,7 @@ const router=createBrowserRouter([
             },
         {
             path:'/allVisa',
-            element:<AllVisa></AllVisa>
+            element:<PrivateRoute><AllVisa></AllVisa></PrivateRoute>
         },
         {
             path:'/addVisa',
@@ -36,11 +36,12 @@ const router=createBrowserRouter([
         },
         {
             path:'/myVisa',
-            element:<MyAddedVisa></MyAddedVisa>
+            element:<PrivateRoute><MyAddedVisa></MyAddedVisa></PrivateRoute>
         },
         {
             path:'/visaApplication',
-            element:<VisaApplication></VisaApplication>
+            element:<PrivateRoute><VisaApplication></VisaApplication></PrivateRoute>,
+            loader:()=>fetch('https://visa-navigator-server-ten.vercel.app/apply')
         },
         {
             path:'/login',

@@ -4,8 +4,12 @@ import { useState, useEffect, useContext } from "react";
 import { AiOutlineDollar } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { authContext } from "../Provider/AuthProvider";
-const Modal = ({ price, closeModal, isModalOpen }) => {
+const Modal = ({ modalData, closeModal, isModalOpen }) => {
+   
     const {user}=useContext(authContext)
+   
+    const{age,application,img,name,processingTime,validity,visaType}=modalData ||{}
+  
     const [currentDate, setCurrentDate] = useState("");
     const handleSubmit=(e)=>{
         e.preventDefault()
@@ -15,8 +19,8 @@ const Modal = ({ price, closeModal, isModalOpen }) => {
         const lastName=form.lastName.value;
         const date=form.date.value;
         const fee=form.fee.value;
-        const document={email,firstName,lastName,date,fee}
-        fetch('http://localhost:7000/apply',{
+        const document={email,firstName,lastName,date,fee,age,application,img,name,processingTime,validity,visaType}
+        fetch('https://visa-navigator-server-ten.vercel.app/apply',{
             method:'POST',
             headers:{
                 'content-type':'application/json'
@@ -87,7 +91,7 @@ const Modal = ({ price, closeModal, isModalOpen }) => {
                                     <span className="label-text flex items-center gap-2">Visa Fee  <AiOutlineDollar className="text-lg text-red-500" /> </span>
                                    
                                 </label>
-                                <input type="text" name='fee' value={price} className="input w-full input-bordered" required />
+                                <input type="text" name='fee' value={modalData?.fee} className="input w-full input-bordered" required />
 
                             </div>
                             <button  type="submit" className="btn w-full mt-3 text-white bg-[#1C7A9C]">Apply</button>

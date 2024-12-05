@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Provider/AuthProvider";
 import { IoCheckmark } from "react-icons/io5";
 import Modal from "./Modal";
-import Swal from "sweetalert2";
+
 
 const VisaDetails = () => {
     const navigate=useNavigate()
@@ -12,18 +12,18 @@ const VisaDetails = () => {
     const visa = visas.find(visa => visa._id === id)
    
     const[isModalOpen,setModalOpen]=useState(false)
-    const[price,setPrice]=useState(0)
+    const[modalData,setModalData]=useState(null)
 
-    const modalOpen=(price)=>{
+    const modalOpen=(visa)=>{
         setModalOpen(true)
-        setPrice(price)
+        setModalData(visa)
 
 
     }
     const closeModal=()=>{
       
         setModalOpen(false)
-        setPrice(0)
+        setModalData(null)
     }
 
 
@@ -55,10 +55,10 @@ const VisaDetails = () => {
                     
                     <div className="card-actions justify-between">
                         <button onClick={()=>navigate(-1)} className="btn bg-[#1C7A9C] text-white">back</button>
-                        <button onClick={()=>modalOpen(visa?.fee)} className="btn bg-[#1C7A9C] text-white">Apply Now</button>
+                        <button onClick={()=>modalOpen(visa)} className="btn bg-[#1C7A9C] text-white">Apply Now</button>
 
                     </div>
-                <div><Modal isModalOpen={isModalOpen} price={price} closeModal={closeModal} ></Modal></div>
+                <div><Modal isModalOpen={isModalOpen} modalData={modalData} closeModal={closeModal} ></Modal></div>
                 </div>
             </div>
         </div>

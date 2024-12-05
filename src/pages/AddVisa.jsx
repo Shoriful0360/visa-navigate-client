@@ -31,7 +31,7 @@ const AddVisa = () => {
         // handleCheckboxChange()
 
         const visaForm = { name, img, visaType, processingTime, description, age, fee, validity, application, selectOption, email }
-        fetch('http://localhost:7000/visas', {
+        fetch('https://visa-navigator-server-ten.vercel.app/visas', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -81,13 +81,13 @@ const AddVisa = () => {
                     <div className="card w-full shrink-0 shadow-2xl">
                         <form onSubmit={handleSubmit} className="card-body">
                             <div className='md:flex   gap-4'>
-                                <div className=" w-1/2">
+                                <div className=" sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Country Name</span>
                                     </label>
                                     <input type="text" name='name' placeholder="Enter your country name" className="input input-bordered w-full " required />
                                 </div>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Country Image</span>
                                     </label>
@@ -96,7 +96,7 @@ const AddVisa = () => {
                                 </div>
                             </div>
                             <div className='md:flex   gap-4'>
-                                <div className=" w-1/2">
+                                <div className=" sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Visa Type</span>
                                     </label>
@@ -110,7 +110,7 @@ const AddVisa = () => {
                                         <option>Residential visa</option>
                                     </select>
                                 </div>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Processing Time</span>
                                     </label>
@@ -119,7 +119,7 @@ const AddVisa = () => {
                                 </div>
                             </div>
                             <div className='md:flex   gap-4'>
-                                <div className=" w-1/2">
+                                <div className=" sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Description</span>
                                     </label>
@@ -128,7 +128,7 @@ const AddVisa = () => {
                                         placeholder="Description"
                                         className="textarea textarea-bordered textarea-xs w-full "></textarea>
                                 </div>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Age</span>
                                     </label>
@@ -137,7 +137,7 @@ const AddVisa = () => {
                                 </div>
                             </div>
                             <div className='md:flex gap-4'>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Fee</span>
                                     </label>
@@ -145,7 +145,7 @@ const AddVisa = () => {
 
 
                                 </div>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Validity</span>
                                     </label>
@@ -154,7 +154,7 @@ const AddVisa = () => {
                                 </div>
                             </div>
                             <div className='md:flex gap-4'>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Application Method</span>
                                     </label>
@@ -162,7 +162,7 @@ const AddVisa = () => {
 
 
                                 </div>
-                                <div className="w-1/2">
+                                <div className="sm:w-1/2">
                                     <label className="label">
                                         <span className="label-text">Required Document</span>
                                     </label>

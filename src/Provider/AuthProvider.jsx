@@ -51,7 +51,7 @@ const AuthProvider = ({children}) => {
     }, [])
   
 useEffect(()=>{
-    fetch('http://localhost:7000/visas')
+    fetch('https://visa-navigator-server-ten.vercel.app/visas')
     .then(res=>res.json())
     .then(data=>setVisas(data))
 },[])

@@ -24,7 +24,7 @@ const router=createBrowserRouter([
             {
                 path:'/visaDetails/:id',
                 element:<VisaDetails></VisaDetails>,
-                loader:({params})=>fetch(`http://localhost:7000/visas/${params.id}`)
+                loader:({params})=>fetch(`https://visa-navigator-server-ten.vercel.app/visas/${params.id}`)
             },
         {
             path:'/allVisa',

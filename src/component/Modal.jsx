@@ -25,15 +25,18 @@ const Modal = ({ price, closeModal, isModalOpen }) => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+            if (data.insertedId) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Congratulation",
+                    text: "apply is success",
+
+                });
+                form.reset()
+
+            }
         })
-        // Swal.fire({
-        //     icon: "success",
-        //     title: "Congratulation",
-        //     text: "apply is success",
-           
-        //   });
-        //   form.reset()
+
     }
 
 
@@ -92,7 +95,7 @@ const Modal = ({ price, closeModal, isModalOpen }) => {
 
 
                         <div className="modal-action">
-                            <button className="btn  " onClick={closeModal}>
+                            <button className="btn btn-secondary " onClick={closeModal}>
                                 Close
                             </button>
                         </div>

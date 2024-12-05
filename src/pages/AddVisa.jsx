@@ -50,7 +50,7 @@ const AddVisa = () => {
                     form.reset()
 
                 }
-                console.log(data)
+               
             })
 
 

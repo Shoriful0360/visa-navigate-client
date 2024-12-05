@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Provider/AuthProvider";
 import { IoCheckmark } from "react-icons/io5";
 import Modal from "./Modal";
 import Swal from "sweetalert2";
 
 const VisaDetails = () => {
+    const navigate=useNavigate()
     const { visas } = useContext(authContext)
     const { id } = useParams()
     const visa = visas.find(visa => visa._id === id)
@@ -52,7 +53,8 @@ const VisaDetails = () => {
                    {visa?.selectOption.map((data,idx)=> <li key={idx}>{data}</li>)}
                    </div>
                     
-                    <div className="card-actions justify-end">
+                    <div className="card-actions justify-between">
+                        <button onClick={()=>navigate(-1)} className="btn bg-[#1C7A9C] text-white">back</button>
                         <button onClick={()=>modalOpen(visa?.fee)} className="btn bg-[#1C7A9C] text-white">Apply Now</button>
 
                     </div>

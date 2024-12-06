@@ -2,12 +2,24 @@ import { useState } from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import UpdateModal from "../component/UpdateModal";
 
 
 const MyAddedVisa = () => {
    const loadedVisas=useLoaderData()
    const[filterVisa,setFilterVisa]=useState(loadedVisas)
-   console.log(filterVisa)
+   const[isModalOpen,setIsModalOpen]=useState(false)
+   const[modalData,setModalData]=useState({})
+
+   const handleOpenModal=(data)=>{
+    setIsModalOpen(true)
+    setModalData(data)
+   }
+
+   const handleCloseModal=()=>{
+    setIsModalOpen(false)
+   }
+ 
    const handleDelete=(id)=>{
     Swal.fire({
       title: "Are you sure?",
@@ -61,7 +73,7 @@ console.log(id)
     <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>validity:   {visa?.validity}</p>
     <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>Application Method: {visa?.application}</p>
     <div className="card-actions justify-between">
-    <button className="btn bg-[#1C7A9C] text-white">Update</button>
+    <button onClick={()=>handleOpenModal(visa)} className="btn bg-[#1C7A9C] text-white">Update</button>
     <button onClick={()=>handleDelete(visa?._id)} className="btn bg-secondary text-white">Delete</button>
     
     </div>
@@ -70,6 +82,7 @@ console.log(id)
               )
           }
       </div>
+      <UpdateModal modalData={modalData} handleCloseModal={handleCloseModal} isModalOpen={isModalOpen} setModalData={setModalData}></UpdateModal>
       </div>
     );
 };

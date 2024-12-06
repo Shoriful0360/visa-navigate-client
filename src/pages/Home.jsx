@@ -12,7 +12,7 @@ const Home = () => {
     <div className="my-5">
     <LatestVisas></LatestVisas>
     <CountrySupport></CountrySupport>
-    <Text></Text>
+
     </div>
         </div>
     );

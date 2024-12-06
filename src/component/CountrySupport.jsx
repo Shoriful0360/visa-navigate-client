@@ -12,7 +12,7 @@ const CountrySupport = () => {
         },
         {
             name:'Australia',
-            img:'https://html.kodesolution.com/2024/immigro-php/images/resource/flag-2.png'
+            img:'https://bracketweb.com/treckwp/wp-content/uploads/2023/04/countries-2-1.jpg'
         },
         {
             name:'Germany',
@@ -20,7 +20,7 @@ const CountrySupport = () => {
         },
         {
             name:'Brazil',
-            img:'https://html.kodesolution.com/2024/immigro-php/images/resource/flag-4.png'
+            img:'https://media.istockphoto.com/id/176430982/vector/flag-of-the-brazil.jpg?s=612x612&w=0&k=20&c=dAwPAmV91dkqzDxyN35GHMwvHZvJjVykV5O-SdGlnE4='
         },
 
         {
@@ -39,8 +39,8 @@ const CountrySupport = () => {
         {
             country?.map((data,idx)=><div key={idx} className="flex justify-center mt-9 hover:border *:hover:text-white w-96 p-4 rounded-md hover:bg-black">
                 <div className="">
-                 <img src={data.img} alt="" />
-                    <h1 className="mt-5 text-center  text-lg font-bold">{data.name}</h1>
+                 <img src={data.img} alt="" className="w-24 h-24 rounded-full"/>
+                    <h1 className="mt-5 text-center transform transition-transform duration-500 group-hover:rotate-360  text-lg font-bold">{data.name}</h1>
                 </div>
             </div>
             )

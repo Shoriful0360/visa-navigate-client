@@ -1,12 +1,45 @@
 import { useState } from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const MyAddedVisa = () => {
    const loadedVisas=useLoaderData()
    const[filterVisa,setFilterVisa]=useState(loadedVisas)
    console.log(filterVisa)
+   const handleDelete=(id)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:7000/visas/${id}`,{
+          method:'DELETE',
+         
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.deletedCount>0){
+console.log(id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+          }
+          const remainingData=filterVisa?.filter(data=>data._id!==id)
+          setFilterVisa(remainingData)
+        })
+        
+      }
+    });
+  }
      
     return (
         <div className="mt-10">
@@ -29,7 +62,7 @@ const MyAddedVisa = () => {
     <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>Application Method: {visa?.application}</p>
     <div className="card-actions justify-between">
     <button className="btn bg-[#1C7A9C] text-white">Update</button>
-    <button className="btn bg-secondary text-white">Delete</button>
+    <button onClick={()=>handleDelete(visa?._id)} className="btn bg-secondary text-white">Delete</button>
     
     </div>
     </div>

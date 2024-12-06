@@ -54,25 +54,24 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
           {
-              user? <div className={`flex justify-center  hover:text-white${user?.displayName} items-center gap-2`}> 
+              user? <div className={`flex relative group justify-center  hover:text-white${user?.displayName} items-center gap-2`}> 
               
                  
                  <img className={`w-10 mr-6 rounded-full h-10 object-cover object-center `} src={user?.photoURL} alt="" />
+
+                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="text-white text-xl font-semibold">{user?.displayName}</span>
+        </div>
+                 <button onClick={()=>signOutUser()} className="btn bg-neutral-600 text-white">SignOut</button>
               </div>
               : 
-               <div>
-             
-          </div>
-          }
-        
-          {
-              user?  <button onClick={()=>signOutUser()} className="btn bg-neutral-600 text-white">SignOut</button>
-              :
-           <div className="sm:*:ml-2 flex gap-1">
+              <div className="sm:*:ml-2 flex gap-1">
               <Link to={'/register'} className="btn bg-neutral-600 text-white ">signIn</Link>
               <Link to={'/login'} className="btn bg-neutral-600 text-white ">login</Link>
            </div>
           }
+        
+         
         
       </div>
   </div>

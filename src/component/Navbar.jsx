@@ -26,7 +26,7 @@ const Navbar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/allVisa'}>All Visa</NavLink></li>
         <li><NavLink to={'/addvisa'}>Add Visa</NavLink></li>
-        <li><NavLink to={'/myVisa'}>My Added Visas</NavLink></li>
+        <li><NavLink to={`/myVisa/${user?.email}`}>My Added Visas</NavLink></li>
         <li><NavLink  to={`/visaApplication/${user?.email}`}>My visa Application</NavLink></li>
         {/* <li><NavLink to={'/'}>My Profile</NavLink></li> */}
     

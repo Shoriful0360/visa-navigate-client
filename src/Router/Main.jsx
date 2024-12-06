@@ -36,8 +36,9 @@ const router=createBrowserRouter([
             element:<PrivateRoute><AddVisa></AddVisa></PrivateRoute>
         },
         {
-            path:'/myVisa',
-            element:<PrivateRoute><MyAddedVisa></MyAddedVisa></PrivateRoute>
+            path:'/myVisa/:email',
+            element:<PrivateRoute><MyAddedVisa></MyAddedVisa></PrivateRoute>,
+            loader:({params})=>fetch(`http://localhost:7000/visas/${params.email}`)
         },
         {
             path:'/visaApplication/:email',

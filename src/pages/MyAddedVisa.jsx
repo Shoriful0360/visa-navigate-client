@@ -1,89 +1,43 @@
+import { useState } from "react";
+import { IoCheckmark } from "react-icons/io5";
+import { Link, useLoaderData } from "react-router-dom";
 
 
 const MyAddedVisa = () => {
-    const handleSubmit=(e)=>{
-        e.preventDefault()
-    }
+   const loadedVisas=useLoaderData()
+   const[filterVisa,setFilterVisa]=useState(loadedVisas)
+   console.log(filterVisa)
+     
     return (
-        <div className='bg-[#F4F3F0] p-10'>
-        <div className="">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-
-                <div className="card w-full shrink-0 shadow-2xl">
-                    <form onSubmit={handleSubmit} className="card-body">
-                        <div className='md:flex   gap-4'>
-                            <div className=" w-1/2">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text" name='name' placeholder="Enter your coffe name" className="input input-bordered w-full " required />
-                            </div>
-                            <div className="w-1/2">
-                                <label className="label">
-                                    <span className="label-text">chef</span>
-                                </label>
-                                <input type="text" name='chef' placeholder="Enter your coffee cheif" className="input w-full input-bordered" required />
-
-                            </div>
-                        </div>
-                        <div className='md:flex   gap-4'>
-                            <div className=" w-1/2">
-                                <label className="label">
-                                    <span className="label-text">Supplier</span>
-                                </label>
-                                <input type="text" name='supplier' placeholder="Enter coffee supplier" className="input input-bordered w-full " required />
-                            </div>
-                            <div className="w-1/2">
-                                <label className="label">
-                                    <span className="label-text">Taste</span>
-                                </label>
-                                <input type="text" name='taste' placeholder="Enter coffee taste" className="input w-full input-bordered" required />
-
-                            </div>
-                        </div>
-                        <div className='md:flex   gap-4'>
-                            <div className=" w-1/2">
-                                <label className="label">
-                                    <span className="label-text">Category</span>
-                                </label>
-                                <input type="text" name='category' placeholder="Enter coffee category" className="input input-bordered w-full " required />
-                            </div>
-                            <div className="w-1/2">
-                                <label className="label">
-                                    <span className="label-text">Details</span>
-                                </label>
-                                <input type="text" name='details' placeholder="Enter coffee-details" className="input w-full input-bordered" required />
-
-                            </div>
-                        </div>
-                       <div className='md:flex gap-4'>
-                       <div className="w-1/2">
-                            <label className="label">
-                                <span className="label-text">photo</span>
-                            </label>
-                            {/* <input type="text" name='photoUrl' placeholder="Enter photo URL" className="input w-full input-bordered" required /> */}
-                            <input type="file" name='photoUrl'  placeholder="Enter photo URL" className="file-input w-full max-w-xs" />
-
-                        </div>
-                        <div className="w-1/2">
-                            <label className="label">
-                                <span className="label-text">price</span>
-                            </label>
-                            <input type="text" name='price' placeholder="Enter Price" className="input w-full input-bordered" required />
-
-                        </div>
-                       </div>
-                        <div className="form-control mt-6">
-                            <button className="btn bg-[#D2B48C]">Add coffee</button>
-                        </div>
-                    </form>
-                 <div className='flex justify-center'>
-                 <button  className='btn bg-secondary '>Back</button>
-                 </div>
-                </div>
-            </div>
-        </div>
+        <div className="mt-10">
+        <h1 className="text-3xl text-center mb-4 text-red-500">My added visas</h1>
+          <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
+          
+          {
+              filterVisa?.map(visa=>
+                  <div key={visa._id} className="card bg-[#E9EFEC] ">
+    <div className="card-body">
+    <div className="flex justify-between items-center">
+    <h2 className="card-title">{visa?.name}</h2>
+    <img src={visa?.img} alt="" className="w-14 h-14 rounded-full" />
     </div>
+    <div className="divider divider-success"></div>
+    <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>{visa?.visaType}</p>
+    <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>Processing Time: {visa?.processingTime}</p>
+    <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>Fee: {visa?.fee} $</p>
+    <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>validity:   {visa?.validity}</p>
+    <p className="flex items-center gap-3"><IoCheckmark></IoCheckmark>Application Method: {visa?.application}</p>
+    <div className="card-actions justify-between">
+    <button className="btn bg-[#1C7A9C] text-white">Update</button>
+    <button className="btn bg-secondary text-white">Delete</button>
+    
+    </div>
+    </div>
+    </div>
+              )
+          }
+      </div>
+      </div>
     );
 };
 

@@ -1,12 +1,52 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const VisaApplication = () => {
-    const applyVisa=useLoaderData()
+    const loadedApplyVisa=useLoaderData()
+    const[applyVisa,setApplyVisa]=useState(loadedApplyVisa)
     console.log(applyVisa)
+    // console.log(applyVisa)
+    const handleDelete=(id)=>{
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:7000/apply/${id}`,{
+            method:'DELETE',
+           
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            if(data.deletedCount>0){
+console.log(id)
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+            }
+            const remainingData=applyVisa?.filter(data=>data._id!==id)
+            setApplyVisa(remainingData)
+          })
+          
+        }
+      });
+    }
     return (
-        <div className="">
-          <h1 className="uppercase text-lg font-bold text-center" >Applicant's copy</h1>
+       <div className="mt-20">
+        {
+          applyVisa?.applyVisa? 
+
+          <div className=" mt-10">
+          <h1 className="uppercase text-lg mb-2 font-bold text-center" >Applicant's copy</h1>
        <div className="grid gap-10 sm:gap-4 sm:grid-cols-2">
        {
             applyVisa?.map(data=> 
@@ -74,7 +114,7 @@ const VisaApplication = () => {
                   </table>
                   
                   <div className="text-center w-full bg-gray-100">
-                    <button className="btn w-full  bg-[#1C7A9C] text-white ">Cancel</button>
+                    <button onClick={()=>handleDelete(data._id)} className="btn w-full  bg-[#1C7A9C] text-white ">Cancel</button>
                   </div>
                 </div>
               </div>)
@@ -82,6 +122,13 @@ const VisaApplication = () => {
        </div>
 
         </div>
+        :
+        <div className="flex flex-col justify-center items-center">
+        <img src="https://i.ibb.co.com/mSBFqs4/error.webp" alt="" className="w-80" />
+        <h1 className="uppercase text-red-600 text-3xl">NO data found please add data</h1>
+      </div>
+        }
+       </div>
     );
 };
 

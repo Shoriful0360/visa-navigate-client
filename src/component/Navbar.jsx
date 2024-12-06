@@ -27,7 +27,7 @@ const Navbar = () => {
         <li><NavLink to={'/allVisa'}>All Visa</NavLink></li>
         <li><NavLink to={'/addvisa'}>Add Visa</NavLink></li>
         <li><NavLink to={'/myVisa'}>My Added Visas</NavLink></li>
-        <li><NavLink to={'/visaApplication'}>My visa Application</NavLink></li>
+        <li><NavLink  to={`/visaApplication/${user?.email}`}>My visa Application</NavLink></li>
         {/* <li><NavLink to={'/'}>My Profile</NavLink></li> */}
     
     </>
@@ -54,15 +54,14 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
           {
-              user? <div className="flex justify-center items-center gap-2"> 
-              <p className="text-white">Wellcome, </p>
-              <h1 className="text-white hidden sm:block">{user?.displayName}</h1>
+              user? <div className={`flex justify-center  hover:text-white${user?.displayName} items-center gap-2`}> 
+              
                  
-                 <img className="w-10 mr-6 rounded-full h-10 object-cover object-center" src={user?.photoURL} alt="" />
+                 <img className={`w-10 mr-6 rounded-full h-10 object-cover object-center `} src={user?.photoURL} alt="" />
               </div>
               : 
                <div>
-              {/* <img className="w-14 h-14 rounded-full" src='https://bracketweb.com/treckwp/wp-content/uploads/2023/04/logo-dark.png' alt="" /> */}
+             
           </div>
           }
         

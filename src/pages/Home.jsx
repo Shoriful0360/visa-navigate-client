@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Banner from "../component/Banner";
 import LatestVisas from "../component/LatestVisas";
+import CountrySupport from "../component/CountrySupport";
 
 const Home = () => {
     
@@ -9,6 +10,7 @@ const Home = () => {
         <Banner></Banner> 
     <div className="my-5">
     <LatestVisas></LatestVisas>
+    <CountrySupport></CountrySupport>
     </div>
         </div>
     );

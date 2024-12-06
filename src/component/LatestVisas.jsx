@@ -39,6 +39,9 @@ const LatestVisas = () => {
               )
           }
       </div>
+     <div className="flex justify-center mt-6">
+    <Link to={'/allVisa'}> <button className="btn  bg-[#1C7A9C] text-white"> See All Visa</button></Link>
+     </div>
       </div>
     );
 };

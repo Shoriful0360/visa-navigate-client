@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../Private/PrivateRoute";
 import VisaDetails from "../component/VisaDetails";
+import ErrorPage from "../pages/ErrorPage";
 
 
 const router=createBrowserRouter([
@@ -39,9 +40,9 @@ const router=createBrowserRouter([
             element:<PrivateRoute><MyAddedVisa></MyAddedVisa></PrivateRoute>
         },
         {
-            path:'/visaApplication',
+            path:'/visaApplication/:email',
             element:<PrivateRoute><VisaApplication></VisaApplication></PrivateRoute>,
-            loader:()=>fetch('https://visa-navigator-server-ten.vercel.app/apply')
+            loader:({params})=>fetch(`http://localhost:7000/apply/${params.email}`)
         },
         {
             path:'/login',
@@ -50,8 +51,14 @@ const router=createBrowserRouter([
         {
             path:'/register',
             element:<Register></Register>
-        }
+        },
+
+
         ]
+    },
+    {
+        path:'*',
+        element:<ErrorPage></ErrorPage>
     }
 ])
 

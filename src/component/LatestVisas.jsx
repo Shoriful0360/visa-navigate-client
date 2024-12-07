@@ -4,18 +4,15 @@ import { IoCheckmark } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 
-const LatestVisas = () => {
-    const{visas}=useContext(authContext)
-    const visa=visas.slice(0,6)
-    
-
+const LatestVisas = ({loadedvisa}) => {
+console.log(loadedvisa)
     return (
       <div>
         <h1 className="text-3xl text-center mb-4 text-red-500">Latest visas</h1>
           <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
           
           {
-              visa?.map(visa=>
+              loadedvisa?.map(visa=>
                   <div key={visa._id} className="card bg-[#E9EFEC] ">
 <div className="card-body">
 <div className="flex justify-between items-center">

@@ -7,9 +7,7 @@ import { authContext } from "../Provider/AuthProvider";
 const UpdateModal = ({modalData,handleCloseModal,isModalOpen,setModalData}) => {
   
 const{name,img,application,fee,processingTime,validity,visaType,_id}=modalData
-// console.log(modalData?.name)
-// console.log(modalData)
-    console.log(processingTime)
+
     const {user}=useContext(authContext)
     const handleSubmit=(e)=>{
         e.preventDefault()
@@ -22,7 +20,7 @@ const{name,img,application,fee,processingTime,validity,visaType,_id}=modalData
         const validity=form.validity.value;
         const visaType=form.visaType.value;
         const updateVisa={name,fee,application,img,processingTime,validity,visaType}
-        fetch(`http://localhost:7000/visas/${_id}`,{
+        fetch(`https://visa-navigator-server-ten.vercel.app/visas/${_id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
@@ -31,7 +29,7 @@ const{name,img,application,fee,processingTime,validity,visaType,_id}=modalData
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+           
             if (data. modifiedCount) {
                 Swal.fire({
                     icon: "success",

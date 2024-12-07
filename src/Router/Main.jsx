@@ -20,11 +20,11 @@ const router=createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>,
-              
+              loader:()=>fetch('http://localhost:7000/visas')
             },
             {
                 path:'/visaDetails/:id',
-                element:<VisaDetails></VisaDetails>,
+                element:<PrivateRoute><VisaDetails></VisaDetails></PrivateRoute>,
                 loader:({params})=>fetch(`https://visa-navigator-server-ten.vercel.app/visas/${params.id}`)
             },
         {
@@ -38,7 +38,7 @@ const router=createBrowserRouter([
         {
             path:'/myVisa/:email',
             element:<PrivateRoute><MyAddedVisa></MyAddedVisa></PrivateRoute>,
-            loader:({params})=>fetch(`http://localhost:7000/visas/${params.email}`)
+            loader:({params})=>fetch(`https://visa-navigator-server-ten.vercel.app/visas/${params.email}`)
         },
         {
             path:'/visaApplication/:email',

@@ -1,16 +1,17 @@
-import { useContext } from "react";
+
 import Banner from "../component/Banner";
 import LatestVisas from "../component/LatestVisas";
 import CountrySupport from "../component/CountrySupport";
-import Text from "../component/Text";
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
-    
+    const loadedvisa=useLoaderData()
+
     return (
         <div className="mt-10">
         <Banner></Banner> 
     <div className="my-5">
-    <LatestVisas></LatestVisas>
+    <LatestVisas loadedvisa={loadedvisa}></LatestVisas>
     <CountrySupport></CountrySupport>
 
     </div>

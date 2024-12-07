@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoEye } from 'react-icons/go';
 import { FcGoogle } from 'react-icons/fc';import { VscGithub } from 'react-icons/vsc';
 import { IoEyeOffOutline } from 'react-icons/io5';
@@ -9,10 +9,13 @@ import Swal from "sweetalert2";
 
 
 const Login = () => {
-    const {signIn,setUser,loginWithGoogle}=useContext(authContext)
+    const {signIn,setUser,loginWithGoogle,forgotPassword}=useContext(authContext)
     const [visible,setVisible]=useState(false)
     const navigate=useNavigate('')
     const emailRef=useRef()
+    const location=useLocation()
+    
+   
     
 
     const handleSubmit=(e)=>{
@@ -22,7 +25,7 @@ const Login = () => {
        signIn(email,password)
        .then(result=>{
         setUser(result.user)
-        navigate('/')
+        navigate(location?.state?location.state : '/')
        })
        .catch(()=>{
       
@@ -42,11 +45,49 @@ const Login = () => {
         loginWithGoogle()
         .then((result)=>{
             setUser(result.user)
-            navigate('/')
+            navigate(location?.state?location.state : '/')
         })
         .catch(()=>{
 
         })
+    }
+
+    const handleforgotPassowrd=()=>{
+      const email=emailRef.current.value
+console.log(email)
+      if(!email){
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Plese provide a email!",
+          
+        });
+          return;
+      }
+      else{
+        forgotPassword(email)
+         
+          .then(()=>{
+            Swal.fire({
+              title: "Reset password send your email",
+              text:'please check it',
+              width: 600,
+              padding: "3em",
+              color: "#716add",
+              background: "#fff url(/images/trees.png)",
+              backdrop: `
+                rgba(0,0,123,0.4)
+                url("/images/nyan-cat.gif")
+                left top
+                no-repeat
+              `
+            });
+          })
+          .catch(()=>{
+              
+          })
+      }
+
     }
     return (
         <div className="hero  ">
@@ -74,9 +115,7 @@ const Login = () => {
              {/* <label className="label">
                <a  onClick={handleForgetPassword} className="label-text-alt link link-hover">Forgot password?</a>
              </label> */}
-             <Link to={`/login/forgot-password`}>
-     Forgot Password?
-   </Link>
+             <p onClick={handleforgotPassowrd} className="cursor-pointer">Forgot Password?</p>
            </div>
            {/* <h1 className='text-xl font-bold text-red-600'>{error}</h1> */}
            <div className="form-control mt-6">

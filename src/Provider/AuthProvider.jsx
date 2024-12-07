@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.init";
 
@@ -28,6 +28,12 @@ const AuthProvider = ({children}) => {
         const provider=new GoogleAuthProvider
         return signInWithPopup(auth,provider)
     }
+    // forget password
+    const forgotPassword=(email)=>{
+        setLoading(true)
+        
+        return sendPasswordResetEmail(auth,email) 
+    }
 
     // update user profile
     const updateUserProfile=(object)=>{
@@ -51,13 +57,15 @@ const AuthProvider = ({children}) => {
     }, [])
   
 useEffect(()=>{
-    fetch('https://visa-navigator-server-ten.vercel.app/visas')
+    fetch('http://localhost:7000/allvisas')
     .then(res=>res.json())
     .then(data=>setVisas(data))
 },[])
 
     const info={
-        user,createSignUp,setUser,loading,setVisas,visas,signOutUser,signIn,loginWithGoogle,updateUserProfile
+        user,createSignUp,setUser,loading,setVisas,
+        visas,signOutUser,signIn,loginWithGoogle,
+        forgotPassword,updateUserProfile
     }
     return (
         <div>

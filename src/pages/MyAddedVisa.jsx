@@ -31,14 +31,14 @@ const MyAddedVisa = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:7000/visas/${id}`,{
+        fetch(`https://visa-navigator-server-ten.vercel.app/visas/${id}`,{
           method:'DELETE',
          
         })
         .then(res=>res.json())
         .then(data=>{
           if(data.deletedCount>0){
-console.log(id)
+
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",

@@ -11,6 +11,15 @@ const CheckboxField = () => {
   return (
     <div>
     <h1 className="text-3xl text-center mb-4 text-red-500">All visas</h1>
+   <div className="flex justify-center mb-10">
+   <div className="dropdown  dropdown-end">
+  <div tabIndex={0} role="button" className="btn m-1">filter</div>
+  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+  </ul>
+</div>
+   </div>
       <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
       
       {

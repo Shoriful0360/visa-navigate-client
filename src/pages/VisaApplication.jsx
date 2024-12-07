@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { authContext } from "../Provider/AuthProvider";
 
 
 const VisaApplication = () => {
-    const loadedApplyVisa=useLoaderData()
-    const[applyVisa,setApplyVisa]=useState(loadedApplyVisa)
-    console.log(applyVisa)
+  const{user}=useContext(authContext)
+    // const loadedApplyVisa=useLoaderData()
+    const[applyVisa,setApplyVisa]=useState([])
+    const[search,setSearch]=useState('')
+ 
     // console.log(applyVisa)
     const handleDelete=(id)=>{
       Swal.fire({
@@ -19,14 +22,14 @@ const VisaApplication = () => {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:7000/apply/${id}`,{
+          fetch(`https://visa-navigator-server-ten.vercel.app/apply/${id}`,{
             method:'DELETE',
            
           })
           .then(res=>res.json())
           .then(data=>{
             if(data.deletedCount>0){
-console.log(id)
+// console.log(id)
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -40,12 +43,34 @@ console.log(id)
         }
       });
     }
+
+    const handleSearch=(e)=>{
+      e.preventDefault()
+      const search=e.target.search.value;
+      setSearch(search)
+    }
+
+useEffect(()=>{
+  fetch(`http://localhost:7000/apply/${user?.email}`,{
+    params:{email:user?.email}
+  })
+  .then(res=>res.json())
+  .then(data=>{
+   setApplyVisa(data)
+  })
+},[])
+
     return (
        <div className="mt-20">
-        {
-          applyVisa?.applyVisa? 
-
-          <div className=" mt-10">
+        <div className="flex justify-center">
+        <div className="join ">
+<form onSubmit={handleSearch}>
+<input className="input input-bordered join-item" name="search" placeholder="Search" />
+<button type="submit"  className="btn join-item rounded-r-full">Subscribe</button>
+</form>
+</div>
+        </div>
+         <div className=" mt-10">
           <h1 className="uppercase text-lg mb-2 font-bold text-center" >Applicant's copy</h1>
        <div className="grid gap-10 sm:gap-4 sm:grid-cols-2">
        {
@@ -122,12 +147,16 @@ console.log(id)
        </div>
 
         </div>
+        {/* {
+          applyVisa?.applyVisa? 
+
+         
         :
         <div className="flex flex-col justify-center items-center">
         <img src="https://i.ibb.co.com/mSBFqs4/error.webp" alt="" className="w-80" />
         <h1 className="uppercase text-red-600 text-3xl">NO data found please add data</h1>
       </div>
-        }
+        } */}
        </div>
     );
 };

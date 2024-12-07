@@ -7,10 +7,8 @@ const AddVisa = () => {
     const { email } = user
     const [selectOption, setSelectOption] = useState([])
     const options = ["Valid passport", "Visa application form", "Recent passport-sized photograph", "Proof of financial means", "Travel itinerary",];
-    console.log(selectOption)
-    const handleBack = () => {
-
-    }
+  
+ 
 
     const handleSubmit = (e) => {
 
@@ -62,14 +60,14 @@ const AddVisa = () => {
         const form = e.target
         const value = form.value;
         const isChecked = form.checked;
-        console.log(isChecked)
+        
         if (isChecked) {
             setSelectOption((prev) => [...prev, value])
 
         }
         else {
             setSelectOption((prev) => prev.filter((opt) => opt !== value));
-            console.log(`Unchecked: ${value}`);
+           
         }
         form.reset()
     }
@@ -188,7 +186,7 @@ const AddVisa = () => {
                             </div>
                         </form>
                         <div className='flex justify-center'>
-                            <button onClick={handleBack} className='btn bg-secondary '>Back</button>
+                            
                         </div>
                     </div>
                 </div>

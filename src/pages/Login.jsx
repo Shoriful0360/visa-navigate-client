@@ -54,7 +54,6 @@ const Login = () => {
 
     const handleforgotPassowrd=()=>{
       const email=emailRef.current.value
-console.log(email)
       if(!email){
         Swal.fire({
           icon: "error",

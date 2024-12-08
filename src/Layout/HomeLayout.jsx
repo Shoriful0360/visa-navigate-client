@@ -7,10 +7,10 @@ import Footer from "../component/Footer";
 const HomeLayout = () => {
     return (
         <div>
-        <header>
+        <header className="">
         <Navbar></Navbar>
         </header>
-        <main className="min-h-[calc(100vh-280px)]">
+        <main className="min-h-[calc(100vh-280px)] pt-40">
             <Outlet></Outlet>
         </main>
         <Footer></Footer>

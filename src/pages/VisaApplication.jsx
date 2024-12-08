@@ -2,15 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { authContext } from "../Provider/AuthProvider";
+import NoData from "../component/NoData";
 
 
 const VisaApplication = () => {
   const{user}=useContext(authContext)
-    // const loadedApplyVisa=useLoaderData()
-    const[applyVisa,setApplyVisa]=useState([])
+    const loadedApplyVisa=useLoaderData()
+    const[applyVisa,setApplyVisa]=useState(loadedApplyVisa)
     const[search,setSearch]=useState('')
- 
-    // console.log(applyVisa)
     const handleDelete=(id)=>{
       Swal.fire({
         title: "Are you sure?",
@@ -29,7 +28,6 @@ const VisaApplication = () => {
           .then(res=>res.json())
           .then(data=>{
             if(data.deletedCount>0){
-// console.log(id)
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -46,19 +44,21 @@ const VisaApplication = () => {
 
     const handleSearch=(e)=>{
       e.preventDefault()
-      const search=e.target.search.value;
-      setSearch(search)
+      const searchCountry=e.target.search.value;
+      setSearch(searchCountry)
+      e.target.reset()
     }
 
-useEffect(()=>{
-  fetch(`http://localhost:7000/apply/${user?.email}`,{
-    params:{email:user?.email}
-  })
-  .then(res=>res.json())
-  .then(data=>{
-   setApplyVisa(data)
-  })
-},[])
+    useEffect(()=>{
+     
+        fetch(`https://visa-navigator-server-ten.vercel.app/apply/${user?.email}?searchParams=${search}`)
+        .then(res=>res.json())
+        .then(data=> setApplyVisa(data))
+     
+    
+    },[search])
+
+
 
     return (
        <div className="mt-20">
@@ -66,16 +66,18 @@ useEffect(()=>{
         <div className="join ">
 <form onSubmit={handleSearch}>
 <input className="input input-bordered join-item" name="search" placeholder="Search" />
-<button type="submit"  className="btn join-item rounded-r-full">Subscribe</button>
+<button type="submit"  className="btn join-item rounded-r-full">Search</button>
 </form>
 </div>
         </div>
-         <div className=" mt-10">
+        {
+          applyVisa?.length?
+          <div className=" mt-10">
           <h1 className="uppercase text-lg mb-2 font-bold text-center" >Applicant's copy</h1>
        <div className="grid gap-10 sm:gap-4 sm:grid-cols-2">
        {
             applyVisa?.map(data=> 
-            <div key={data._id} className="sm:p-6 bg-gray-100 ">
+            <div key={data._id} className="sm:p-6  ">
                 <div className="">
                   <table className="table-auto w-full border-collapse border border-gray-300 bg-white">
                     <thead className="w-full">
@@ -147,16 +149,10 @@ useEffect(()=>{
        </div>
 
         </div>
-        {/* {
-          applyVisa?.applyVisa? 
-
-         
-        :
-        <div className="flex flex-col justify-center items-center">
-        <img src="https://i.ibb.co.com/mSBFqs4/error.webp" alt="" className="w-80" />
-        <h1 className="uppercase text-red-600 text-3xl">NO data found please add data</h1>
-      </div>
-        } */}
+          :
+         <NoData></NoData>
+        }
+      
        </div>
     );
 };

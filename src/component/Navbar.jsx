@@ -2,6 +2,7 @@ import {  useContext, useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../Provider/AuthProvider";
+import { Tooltip } from "react-tooltip";
 
 
 
@@ -47,36 +48,39 @@ const Navbar = () => {
     </>
     return (
    
-      <div className={`navbar  rounded-md right-0 left-0 z-50 py-4 px-5 ${isScrolled? 'bg-white/30   backdrop-blur-md shadow-md':'bg-blue-950 '}`}>
+      <div className={`navbar fixed container top-0 max-w-[1600px] rounded-md   z-50 py-4 px-5 ${isScrolled? 'bg-white/50   backdrop-blur-md shadow-md':'bg-[#034833] '}`}>
       <div className="navbar-start">
           <div className="dropdown">
-              <div tabIndex={0} role="button" className="btn text-xl text-white btn-ghost lg:hidden">
+              <div tabIndex={0} role="button" className={`btn text-xl ${isScrolled?'text-[#034833] ':'text-white'}  btn-ghost lg:hidden`}>
                  <FaBars></FaBars>
               </div>
               <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  className={`menu menu-sm dropdown-content bg-base-100 ${isScrolled?'text-[#034833] ':'text-black'} rounded-box z-[1] mt-3 w-52 p-2 shadow`}>
                   {link}
               </ul>
           </div>
-          <a className="btn btn-ghost text-white hidden sm:block text-3xl"> Visa Navigate</a>
+          <a className={`btn btn-ghost ${isScrolled?'text-[#034833] ':'text-white'} hidden sm:block text-3xl`}> Visa Navigate</a>
       </div>
       <div className="navbar-center  hidden lg:flex">
-          <ul className="menu text-white text-lg font-semibold  menu-horizontal px-1">
+          <ul className={`menu  ${isScrolled?'text-[#034833] ':'text-white'}  text-lg font-semibold  menu-horizontal px-1`}>
               {link}
           </ul>
       </div>
       <div className="navbar-end">
           {
               user?<div className="flex justify-center items-center">
-                 <div className={` relative group  hover:text-white  gap-2`}> 
-              
-                 
+                 <div >  
+              <a
+              data-tooltip-id="name"
+              data-tooltip-content={`${user?.displayName}`}
+              data-tooltip-place="top"
+              >
               <img className={`w-10 mr-6 rounded-full h-10 object-cover object-center `} src={user?.photoURL} alt="" />
+              </a>
+              <Tooltip id="name"></Tooltip>
 
-              <div className="absolute -left-14 top-0 p-2  bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-       <span className="text-white text-xl font-semibold">{user?.displayName}</span>
-     </div>
+             
            </div>
            <button onClick={()=>signOutUser()} className="btn bg-neutral-600 text-white">SignOut</button>
               </div>
@@ -87,7 +91,7 @@ const Navbar = () => {
               <Link to={'/login'} className="btn bg-neutral-600 text-white ">login</Link>
            </div>
           }
-       <label className="swap text-white swap-rotate">
+       <label className={`swap ${isScrolled?'text-[#034833] ':'text-white'}  swap-rotate`}>
   {/* this hidden checkbox controls the state */}
   <input     type="checkbox"
                     className="theme-controller"

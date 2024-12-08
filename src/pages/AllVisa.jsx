@@ -1,26 +1,57 @@
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "../Provider/AuthProvider";
 import { IoCheckmark } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import NoData from "../component/NoData";
+import { Typewriter } from "react-simple-typewriter";
 
 const CheckboxField = () => {
+  const visaType=['Job Visa','Student Visa','Bunsiness Visa','Tourist Visa','Official Visa','Residential Visa']
+  const [filter,setFilter]=useState([])
 
-  const{visas}=useContext(authContext)
+  const{visas,setVisas}=useContext(authContext)
+
+  const handleFilterSubmit=(e)=>{
+e.preventDefault()
+const filter=e.target.value;
+setFilter(filter)
+  }
+
+  useEffect(()=>{
+fetch(`https://visa-navigator-server-ten.vercel.app/allvisas?searchParams=${filter}`)
+.then(res=>res.json())
+.then(data=>setVisas(data))
+
+  },[filter])
 
   return (
     <div>
-    <h1 className="text-3xl text-center mb-4 text-red-500">All visas</h1>
-   <div className="flex justify-center mb-10">
-   <div className="dropdown  dropdown-end">
-  <div tabIndex={0} role="button" className="btn m-1">filter</div>
-  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-   </div>
-      <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
+
+    
+<select onChange={handleFilterSubmit} name="filter" className="select mt-5 select-bordered w-full max-w-xs">
+  <option disabled selected>Filter</option>
+  {visaType.map((type,idx)=><option   key={idx}>{type}</option>)}
+</select>
+
+     {
+      visas?.length?
+      <div>
+            <h1 className="text-3xl text-center mb-3 font-bold">
+               
+                <span style={{ color: '#034833' }}>
+                    <Typewriter
+                        words={['All Visa']}
+                        loop={0} // Loops 5 times
+                        cursor
+                        cursorStyle="|"
+                        typeSpeed={70}
+                        deleteSpeed={50}
+                        delaySpeed={1000}
+                    />
+                </span>
+            </h1>
+      <div className="grid lg:grid-cols-3 gap-4 mt-5 md:grid-cols-2">
       
       {
           visas?.map(visa=>
@@ -45,6 +76,10 @@ const CheckboxField = () => {
           )
       }
   </div>
+      </div>
+      :
+      <NoData></NoData>
+     }
   </div>
   );
 };

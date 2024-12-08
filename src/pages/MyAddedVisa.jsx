@@ -3,6 +3,7 @@ import { IoCheckmark } from "react-icons/io5";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import UpdateModal from "../component/UpdateModal";
+import NoData from "../component/NoData";
 
 
 const MyAddedVisa = () => {
@@ -55,7 +56,10 @@ const MyAddedVisa = () => {
      
     return (
         <div className="mt-10">
-        <h1 className="text-3xl text-center mb-4 text-red-500">My added visas</h1>
+       {
+        filterVisa?.length?
+        <div>
+ <h1 className="text-3xl text-center mb-4 text-red-500">My added visas</h1>
           <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
           
           {
@@ -82,6 +86,13 @@ const MyAddedVisa = () => {
               )
           }
       </div>
+        </div>
+        :
+        <div>
+          <NoData></NoData>
+  
+        </div>
+       }
       <UpdateModal modalData={modalData} handleCloseModal={handleCloseModal} isModalOpen={isModalOpen} setModalData={setModalData}></UpdateModal>
       </div>
     );

@@ -1,14 +1,32 @@
-import { useContext } from "react";
-import { authContext } from "../Provider/AuthProvider";
+
 import { IoCheckmark } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
+
 
 
 const LatestVisas = ({loadedvisa}) => {
-console.log(loadedvisa)
+
     return (
       <div>
-        <h1 className="text-3xl text-center mb-4 text-red-500">Latest visas</h1>
+ <h1 className="text-3xl text-center mb-4 text-red-500">
+   
+       <span className="text-[#034833] text-5xl font-bold font-serif italic">
+       <Typewriter
+           words={[' Latest visas']}
+           loop={0} // Loops 5 times
+           cursor
+           cursorStyle="_"
+           typeSpeed={100}
+           deleteSpeed={50}
+           delaySpeed={1000}
+          >
+
+          </Typewriter>
+       </span>
+
+
+        </h1>
           <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
           
           {

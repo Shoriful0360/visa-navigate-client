@@ -20,7 +20,7 @@ const MyAddedVisa = () => {
    const handleCloseModal=()=>{
     setIsModalOpen(false)
    }
- 
+//  delete data
    const handleDelete=(id)=>{
     Swal.fire({
       title: "Are you sure?",

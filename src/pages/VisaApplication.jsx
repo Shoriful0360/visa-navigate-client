@@ -72,7 +72,7 @@ const VisaApplication = () => {
         </div>
         {
           applyVisa?.length?
-          <div className=" mt-10">
+          <div className="mt-10">
           <h1 className="uppercase text-lg mb-2 font-bold text-center" >Applicant's copy</h1>
        <div className="grid gap-10 sm:gap-4 sm:grid-cols-2">
        {
@@ -129,7 +129,7 @@ const VisaApplication = () => {
                       <tr className="w-full">
                         <th className="border w-[45%] border-gray-300 px-4 py-2 text-gray-700">Application Name</th>
                         <th className="border w-[10%] border-gray-300 px-4 py-2 text-gray-700">:</th>
-                        <th className="border w-[45%] border-gray-300 px-4 py-2 text-gray-700">{data.firstName}{data.lastName}</th>
+                        <th className="border w-[45%] border-gray-300 px-4 py-2 text-gray-700">{data.firstName} {data.lastName}</th>
                       </tr>
                       <tr className="w-full">
                         <th className="border w-[45%] border-gray-300 px-4 py-2 text-gray-700">Email</th>

@@ -60,7 +60,6 @@ const AddVisa = () => {
         const form = e.target
         const value = form.value;
         const isChecked = form.checked;
-        console.log('value :',value,'checked:',isChecked)
         
         if (isChecked) {
             setSelectOption((prev) => [...prev, value])

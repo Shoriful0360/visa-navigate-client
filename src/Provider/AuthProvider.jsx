@@ -7,6 +7,7 @@ const AuthProvider = ({children}) => {
     const [visas,setVisas]=useState([]);
     const [user,setUser]=useState()
     const [loading,setLoading]=useState(true)
+    const [isDarkMode, setIsDarkMode] = useState(false);
 // create sing up
     const createSignUp=(email,password)=>{
         setLoading(true)
@@ -65,7 +66,7 @@ useEffect(()=>{
     const info={
         user,createSignUp,setUser,loading,setVisas,
         visas,signOutUser,signIn,loginWithGoogle,
-        forgotPassword,updateUserProfile
+        forgotPassword,updateUserProfile,isDarkMode,setIsDarkMode
     }
     return (
         <div>

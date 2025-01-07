@@ -3,15 +3,16 @@ import { FaBars } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { authContext } from "../Provider/AuthProvider";
 import { Tooltip } from "react-tooltip";
+import { IoIosNotifications } from "react-icons/io";
 
 
 
 
 
 const Navbar = () => {
-  const {user,signOutUser}=useContext(authContext)
+  const {user,signOutUser,isDarkMode, setIsDarkMode}=useContext(authContext)
   const [isScrolled,setIsScrolled]=useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
 
   const handleThemeChange = (e) => {
     setIsDarkMode(e.target.checked); // Update state based on checkbox
@@ -20,7 +21,7 @@ const Navbar = () => {
    
     if (isDarkMode) {
       document.body.style.backgroundColor = 'black';
-      document.body.style.color = 'red';
+      document.body.style.color = 'white';
   } else {
       document.body.style.backgroundColor = '';
       document.body.style.color = '';
@@ -68,6 +69,7 @@ const Navbar = () => {
           </ul>
       </div>
       <div className="navbar-end">
+        <Link to={'/message'}><div className="text-4xl text-white "><IoIosNotifications /></div></Link>
           {
               user?<div className="flex justify-center items-center">
                  <div >  

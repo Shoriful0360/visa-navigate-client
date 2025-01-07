@@ -1,11 +1,14 @@
 
+import { useContext } from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
+import { authContext } from "../Provider/AuthProvider";
 
 
 
 const LatestVisas = ({loadedvisa}) => {
+   const {isDarkMode, setIsDarkMode}=useContext(authContext)
 
     return (
       <div className="md:mt-24 mt-36">
@@ -27,11 +30,11 @@ const LatestVisas = ({loadedvisa}) => {
 
 
         </h1>
-          <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2">
+          <div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-4 md:grid-cols-2">
           
           {
               loadedvisa?.map(visa=>
-                  <div key={visa._id}  data-aos="zoom-in-up" className="card  bg-[#E9EFEC] ">
+                  <div key={visa._id}  data-aos="zoom-in-up" className={`card ${isDarkMode?"bg-[#707B53]":"bg-gray_white"}  bg-[#707B53] `}>
 <div className="card-body">
 <div className="flex justify-between items-center">
 <h2 className="card-title">{visa?.name}</h2>

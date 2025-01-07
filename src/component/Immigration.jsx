@@ -1,9 +1,44 @@
 
 
 import Marquee from "react-fast-marquee";
+import toast from "react-hot-toast";
 import { GiAirplaneDeparture } from "react-icons/gi";
 import { IoAirplaneSharp } from "react-icons/io5";
+
+
 const Immigration = () => {
+
+    const handleform=async(e)=>{
+        e.preventDefault()
+        const form=e.target;
+        const name=form.name.value;
+        const email=form.email.value;
+        const phone=form.phone.value;
+        const subject=form.subject.value;
+        const description=form.description.value;
+        const formData={name,email,phone,subject,description}
+        console.log(formData)
+
+        
+        fetch('https://visa-navigator-server-ten.vercel.app/message',{
+
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(formData)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.insertedId){
+                toast.success('suceess,send your message')
+                form.reset()
+            }
+        })
+   
+        
+
+    }
     return (
         <div>
             <Marquee autoFill speed={70}  pauseOnHover className="bg-[#DF1119]  uppercase text-white font-medium mt-5 py-2">
@@ -52,18 +87,18 @@ const Immigration = () => {
 
 {/* form */}
 <div className="bg-reded rounded-md md:absolute -bottom-24 py-10 px-10">
-    <form action="">
+    <form onSubmit={handleform} action="">
     <div className="flex gap-4">
-    <input type="text" name="name" placeholder="Enter Name" className="input  w-full max-w-xs" />
-    <input type="email" placeholder="Enter Email" className="input  w-full max-w-xs" />
+    <input type="text" name="name" placeholder="Enter Name" className="input text-black  w-full max-w-xs" />
+    <input type="email" name="email" placeholder="Enter Email" className="input text-black w-full max-w-xs" />
     </div>
    <div className="flex gap-4 mt-4">
-   <input type="text" placeholder="Subject" name="subject" className="input w-full max-w-xs" />
-   <input type="text" placeholder="phone" name="phone" className="input w-full max-w-xs" />
+   <input type="text" placeholder="Subject" name="subject" className="input text-black w-full max-w-xs" />
+   <input type="text" placeholder="phone" name="phone" className="input w-full text-black max-w-xs" />
    </div>
-    <textarea className="textarea w-full h-48 mt-4" placeholder="Bio"></textarea>
+    <textarea className="textarea w-full text-black h-48 mt-4" name="description" placeholder="Bio"></textarea>
    <div className="flex justify-center">
-   <button className="btn bg-black text-white">Send Message</button>
+   <button type="submit" className="btn bg-black text-white">Send Message</button>
    </div>
     </form>
 </div>

@@ -10,6 +10,9 @@ import Register from "../pages/Register";
 import PrivateRoute from "../Private/PrivateRoute";
 import VisaDetails from "../component/VisaDetails";
 import ErrorPage from "../pages/ErrorPage";
+import { ImIcoMoon } from "react-icons/im";
+import Immigration from "../component/Immigration";
+import Message from "../pages/Message";
 
 
 const router=createBrowserRouter([
@@ -53,6 +56,11 @@ const router=createBrowserRouter([
             path:'/register',
             element:<Register></Register>
         },
+        {
+            path:'/message',
+            element:<PrivateRoute><Message></Message></PrivateRoute>,
+            loader:()=>fetch('https://visa-navigator-server-ten.vercel.app/message')
+        }
 
 
         ]

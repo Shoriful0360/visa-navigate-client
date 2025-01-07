@@ -10,7 +10,7 @@ const CheckboxField = () => {
   const visaType = ['Job Visa', 'Student Visa', 'Bunsiness Visa', 'Tourist Visa', 'Official Visa', 'Residential Visa']
   const [filter, setFilter] = useState([])
 
-  const { visas, setVisas } = useContext(authContext)
+  const { visas, setVisas,isDarkMode } = useContext(authContext)
 
   const handleFilterSubmit = (e) => {
     e.preventDefault()
@@ -29,8 +29,8 @@ const CheckboxField = () => {
     <div>
 
 
-      <select onChange={handleFilterSubmit} name="filter" className="select mt-5 select-bordered w-full max-w-xs">
-        <option disabled selected>Filter</option>
+      <select onChange={handleFilterSubmit} name="filter" className={`select mt-5 select-bordered ${isDarkMode?"bg-[#707B53]":""}  w-full max-w-xs`}>
+        <option disabled selected >Filter</option>
         {visaType.map((type, idx) => <option key={idx}>{type}</option>)}
       </select>
 
@@ -55,7 +55,7 @@ const CheckboxField = () => {
 
               {
                 visas?.map(visa =>
-                  <div key={visa._id} className="card bg-[#E9EFEC] ">
+                  <div key={visa._id} className={`card ${isDarkMode?"bg-[#707B53]":"bg-gray_white"}  `}>
                     <div className="card-body">
                       <div className="flex justify-between items-center">
                         <h2 className="card-title">{visa?.name}</h2>

@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useContext } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { authContext } from "../Provider/AuthProvider";
 
 
 const Service = () => {
+    const {isDarkMode}=useContext(authContext)
     const service=[
         {
             img:'https://wp.rrdevs.net/routex/wp-content/uploads/2024/10/service-3.png',
@@ -35,7 +38,7 @@ const Service = () => {
         <div>
             
 <div className="text-center  mt-10">
-    <h1 className="text-[#034833]">Our Services</h1>
+    <h1 className={ `${isDarkMode?'text-white':''} text-[#034833]`}>Our Services</h1>
     <span className="text-[#659287] text-4xl uppercase font-bold font-serif italic">
        <Typewriter
            words={[' Outstanding immigration visa services.']}

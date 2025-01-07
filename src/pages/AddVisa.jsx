@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { authContext } from "../Provider/AuthProvider";
 
 const AddVisa = () => {
-    const { user } = useContext(authContext)
+    const { user,isDarkMode } = useContext(authContext)
     const { email } = user
     const [selectOption, setSelectOption] = useState([])
     const options = ["Valid passport", "Visa application form", "Recent passport-sized photograph", "Proof of financial means", "Travel itinerary",];
@@ -72,22 +72,22 @@ const AddVisa = () => {
         form.reset()
     }
     return (
-        <div className=' sm:w-10/12 mx-auto w-full '>
+        <div className={` sm:w-10/12  mx-auto w-full `}>
         <div className="">
             <div className="hero-content flex-col  lg:flex-row-reverse">
 
                 <div className="card w-full shrink-0 shadow-2xl">
-                    <form onSubmit={handleSubmit} className="card-body">
+                    <form onSubmit={handleSubmit} className={`card-body ${isDarkMode?'text-black':''}  `}>
                         <div className='md:flex   gap-4'>
                             <div className=" sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Country Name</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Country Name</span>
                                 </label>
                                 <input type="text" name='name' placeholder="Enter your country name" className="input input-bordered w-full " required />
                             </div>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Country Image</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Country Image</span>
                                 </label>
                                 <input type="text" name='img' placeholder="Enter your country photo url" className="input w-full input-bordered" required />
 
@@ -96,7 +96,7 @@ const AddVisa = () => {
                         <div className='md:flex   gap-4'>
                             <div className=" sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Visa Type</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Visa Type</span>
                                 </label>
                                 {/* <input type="text" name='supplier' placeholder="Enter coffee supplier" className="input input-bordered w-full " required /> */}
                                 <select name="visaType" className="select  input-bordered  w-full ">
@@ -110,7 +110,7 @@ const AddVisa = () => {
                             </div>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Processing Time</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Processing Time</span>
                                 </label>
                                 <input type="text" name='processingTime' placeholder="Enter Processing Time" className="input w-full input-bordered" required />
 
@@ -119,7 +119,7 @@ const AddVisa = () => {
                         <div className='md:flex   gap-4'>
                             <div className=" sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Description</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Description</span>
                                 </label>
                                 <textarea
                                     name="description"
@@ -128,7 +128,7 @@ const AddVisa = () => {
                             </div>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Age</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Age</span>
                                 </label>
                                 <input type="number" name='age' placeholder="Enter your age year" className="input w-full input-bordered" required />
 
@@ -137,7 +137,7 @@ const AddVisa = () => {
                         <div className='md:flex gap-4'>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Fee</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Fee</span>
                                 </label>
                                 <input type="number" name='fee' placeholder="Enter fee" className="input w-full input-bordered" required />
 
@@ -145,7 +145,7 @@ const AddVisa = () => {
                             </div>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Validity</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Validity</span>
                                 </label>
                                 <input type="text" name='validity' placeholder="Enter Validity" className="input w-full input-bordered" required />
 
@@ -154,7 +154,7 @@ const AddVisa = () => {
                         <div className='md:flex gap-4'>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Application Method</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Application Method</span>
                                 </label>
                                 <input type="text" name='application' placeholder="Enter your application method" className="input w-full input-bordered" required />
 
@@ -162,18 +162,18 @@ const AddVisa = () => {
                             </div>
                             <div className="sm:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Required Document</span>
+                                    <span className={`label-text ${isDarkMode?'text-white':''}`}>Required Document</span>
                                 </label>
                                 {/* <input type="text" name='validity' placeholder="Enter Validity" className="input w-full input-bordered" required /> */}
                                 {
                                     options.map((option, index) => (
-                                        <div key={index} className="mb-2">
+                                        <div key={index} className={`mb-2 ${isDarkMode?'text-white':''} `}>
                                             <label >
                                                 <input
                                                     type="checkbox"
                                                     value={option}
                                                     onChange={handleCheckboxChange}
-                                                    className="mr-2"
+                                                    className={`mr-2 `}
                                                 />
                                                 {option}
                                             </label>

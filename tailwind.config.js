@@ -18,7 +18,8 @@ export default {
         wiggle: 'wiggle 1s ease-in-out infinite',
       },
       colors:{
-        reded:'#DF1119'
+        reded:'#DF1119',
+        gray_white:'#ECF0F3'
       }
     },
   },

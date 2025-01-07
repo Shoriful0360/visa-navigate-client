@@ -51,9 +51,9 @@ const Service = () => {
        </span>
     <p className="mt-2">Experience unparalleled growth with our expert guidance. Navigate challenges, seize opportunities, and watch your business.</p>
 </div>        
-            <div className="grid mt-5 lg:grid-cols-4 md:grid-cols-2 gap-3">
-            {service.map((data,idx)=><div className="relative " key={idx} >
-            <div className="card w-full  bg-base-100  shadow-xl">
+            <div className="grid mt-5  lg:grid-cols-4 md:grid-cols-2 gap-3">
+            {service.map((data,idx)=><div data-aos="zoom-in" className="relative   " key={idx} >
+            <div className="card w-full bg-base-100  shadow-xl">
             <figure className="">
               <img
                 src={data.img}
@@ -62,14 +62,14 @@ const Service = () => {
             </figure>
            <div>
            </div>
-           
+           <div class="absolute inset-0 rounded-lg bg-[#034833] opacity-30 "></div>
            
           </div>
-         <div className="bg-[#034833]  object-center absolute w-20 h-20 rounded-full  top-10 right-10 z-50 flex justify-center p-4">
+         <div className="bg-[#034833]  object-center absolute w-20 h-20 rounded-full  top-10 right-10 z-40 flex justify-center p-4">
          <img className="w-full" src={data.icon} alt="" />
          </div>
           <h1 className="absolute bottom-3 ml-10 text-white text-lg font-semibold">{data.name}</h1>
-          <div class="absolute inset-0 rounded-lg bg-[#034833] opacity-30 "></div>
+         
           </div>
 )}
             </div>

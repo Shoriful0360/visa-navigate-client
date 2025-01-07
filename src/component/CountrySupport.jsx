@@ -37,9 +37,9 @@ const CountrySupport = () => {
         </div>
          <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2">
         {
-            country?.map((data,idx)=><div key={idx} className="flex justify-center mt-9 hover:border *:hover:text-white  p-4 rounded-md hover:bg-black">
+            country?.map((data,idx)=><div key={idx} className="flex transition  justify-center mt-9 hover:border *:hover:text-white  p-4 rounded-md hover:bg-black">
                 <div className="">
-                 <img src={data.img} alt="" className="w-24 h-24 rounded-full"/>
+                 <img src={data.img} alt="" className="w-24 h-24 animate-slow rounded-full"/>
                     <h1 className="mt-5 text-center transform transition-transform duration-500 group-hover:rotate-360  text-lg font-bold">{data.name}</h1>
                 </div>
             </div>

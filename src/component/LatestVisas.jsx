@@ -8,7 +8,7 @@ import { Typewriter } from "react-simple-typewriter";
 const LatestVisas = ({loadedvisa}) => {
 
     return (
-      <div>
+      <div className="md:mt-24 mt-36">
  <h1 className="text-3xl text-center mb-4 text-red-500">
    
        <span className="text-[#034833] text-5xl font-bold font-serif italic">
@@ -31,11 +31,11 @@ const LatestVisas = ({loadedvisa}) => {
           
           {
               loadedvisa?.map(visa=>
-                  <div key={visa._id} className="card bg-[#E9EFEC] ">
+                  <div key={visa._id}  data-aos="zoom-in-up" className="card  bg-[#E9EFEC] ">
 <div className="card-body">
 <div className="flex justify-between items-center">
 <h2 className="card-title">{visa?.name}</h2>
-<img src={visa?.img} alt="" className="w-14 h-14 rounded-full" />
+<img src={visa?.img} alt="" className="w-14 h-14 animate-pulse rounded-full" />
 </div>
 <div className="divider divider-success"></div>
 

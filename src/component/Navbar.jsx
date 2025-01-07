@@ -48,7 +48,7 @@ const Navbar = () => {
     </>
     return (
    
-      <div className={`navbar fixed container top-0 max-w-[1600px] rounded-md   z-50 py-4 px-5 ${isScrolled? 'bg-white/50   backdrop-blur-md shadow-md':'bg-[#034833] '}`}>
+      <div className={`navbar fixed  max-w-[1600px] mx-auto rounded-md   z-50 py-4 px-5 ${isScrolled? 'bg-white/50   backdrop-blur-md shadow-md':'bg-[#034833] '}`}>
       <div className="navbar-start">
           <div className="dropdown">
               <div tabIndex={0} role="button" className={`btn text-xl ${isScrolled?'text-[#034833] ':'text-white'}  btn-ghost lg:hidden`}>

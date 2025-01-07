@@ -6,11 +6,11 @@ import Footer from "../component/Footer";
 
 const HomeLayout = () => {
     return (
-        <div>
-        <header className="">
+        <div className="">
+        <header className=" w-full">
         <Navbar></Navbar>
         </header>
-        <main className="min-h-[calc(100vh-280px)] pt-40">
+        <main className="min-h-[calc(100vh-280px)] pt-40 px-4">
             <Outlet></Outlet>
         </main>
         <Footer></Footer>

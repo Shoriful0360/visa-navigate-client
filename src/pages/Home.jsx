@@ -5,6 +5,7 @@ import CountrySupport from "../component/CountrySupport";
 import { useLoaderData } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import Service from "../component/Service";
+import Immigration from "../component/Immigration";
 
 const Home = () => {
     const loadedvisa=useLoaderData()
@@ -28,8 +29,10 @@ const Home = () => {
             </h1>
           </div>
         <Banner></Banner> 
+        
        
         <Service></Service>
+        <Immigration></Immigration>
     <div className="my-5">
     <LatestVisas loadedvisa={loadedvisa}></LatestVisas>
     <CountrySupport></CountrySupport>

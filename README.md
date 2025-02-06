@@ -30,3 +30,12 @@
   7. Real-time Alerts:
 
      * Toast notifications for success/error actions (e.g., visa added/updated).
+    
+  8. Tools:
+   
+     • React
+     • Node.js
+     • express.js
+     • Firebase
+     • Mongodb
+     • React toastify     
